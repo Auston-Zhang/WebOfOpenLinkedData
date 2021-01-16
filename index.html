@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 
+  
+
 <head style="padding:20px">
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -17,6 +19,13 @@
 </head>
 
 <body style="padding:20px">
+  
+
+  <!-- the banner, it should show up when there are 5 nominations-->
+  <div class="alert alert-success alert-dismissible fade show" role="alert" id="bannerToShow" style="display: none">
+    <strong>Wow!</strong> You have 5 nominations on your list!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 
 
 
@@ -51,7 +60,7 @@
 
     <p></p>
     
-   
+   <!-- the loading bar-->
     <div class="progress bg-success "id="loader" style="display: none ; height: 30px;">
       <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">Loading...</div>
     </div>
@@ -63,6 +72,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Search Results</h5>
+            <p></p>
             <div class="container" id="movieSearchResult">
             </div>
           </div>
@@ -73,20 +83,14 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body" id="nominatedMovies">
-            <h5 class="card-title">Nonminated Movies</h5>
-
+            <h5 class="card-title">Nominations</h5>
+            <p></p>  
           </div>
         </div>
       </div>
     </div>
 
-    
-
-
-
-
-
-
+   
 
     <!-- local script-->
     <script src="js/app.js"></script>
@@ -98,4 +102,4 @@
 </body>
 
 
-</html>
+</html> 

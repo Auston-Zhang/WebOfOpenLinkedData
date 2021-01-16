@@ -122,6 +122,13 @@ $('#movieSearchResult').on('click', 'button', function () {
     $(this).parent("li").children("p").clone().appendTo("#nominatedList");
 
     //$("#nominatedMovies").children("li").appendChild(butt);
+
+    // check if we should display the banner
+    if(currNominatedNum===nominateLimit){
+      $("#bannerToShow").fadeIn("3000");
+
+    } 
+
   }
   //if the use has already nominated 5 movies, then the user cannot continue to nominate
   else {
@@ -137,6 +144,10 @@ $('#nominatedMovies').on('click', 'button', function () {
   $(this).parent("p").remove();
   nominatedList.delete(this.id);
   currNominatedNum--;
+
+  if(currNominatedNum<nominateLimit){
+    $("#bannerToShow").fadeOut("4000");
+  }
 
   alert("Removed!");
   checkSearchResultButton();
