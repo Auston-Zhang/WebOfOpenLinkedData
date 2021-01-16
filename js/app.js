@@ -31,19 +31,32 @@ function checkSearchResultButton() {
 
 $('#searchButton').on('submit', function (ev) {
 
+    
+    
+    $("#loader").fadeIn("3000");
+    
+    $("#loader").fadeOut("3000");
+
+    
   // clear the prevous search outcome
-  $("#movieSearchResult").empty();
-  /*  
+  
  
+
+  
+  /*  
+    
    */
   // perform search and show the result
+  
+  
+  $("#movieSearchResult").empty(); 
   ev.preventDefault();
   var value = $('input[name=movieSearchBar]').val();
 
-
+  
   $.getJSON('https://www.omdbapi.com/?&apikey=2170dc30&type=movie&s=' + value, function (data) {
     var items = [];
-    var count = 0;
+    
 
     $.each(data.Search, function (entryIndex, entry) {
 
@@ -52,16 +65,16 @@ $('#searchButton').on('submit', function (ev) {
       if (!nominatedList.has(nominateImdbID)) {
 
         items.push('<li class="list-group-item d-flex justify-content-between align-items-center"><p>' + this.Title + " (" + this.Year + ")"
-          + '</p><button type="button" class="btn btn-warning btn-sm" id="' + nominateImdbID + '">Nominate ' + count + '</button></li>');
+          + '</p><button type="button" class="btn btn-outline-success btn-sm" id="' + nominateImdbID + '">Nominate ' +'</button></li>');
         // check if the item is already in the nominated list
 
-        count++;
+        
       }
       else {
         items.push('<li class="list-group-item d-flex justify-content-between align-items-center"><p>' + this.Title + " (" + this.Year + ")"
-          + '</p><button type="button" class="btn btn-warning btn-sm" id="' + nominateImdbID + '"disabled>Nominate ' + count + '</button></li>');
+          + '</p><button type="button" class="btn btn-outline-success btn-sm" id="' + nominateImdbID + '"disabled>Nominate ' + '</button></li>');
         // check if the item is already in the nominated list
-        count++;
+        
 
       }
 
@@ -74,6 +87,11 @@ $('#searchButton').on('submit', function (ev) {
   });
 
   console.log(nominatedList);
+  
+
+  
+  
+  
 
 });
 
@@ -100,7 +118,7 @@ $('#movieSearchResult').on('click', 'button', function () {
 
     var butt = $("<button></button>").text("Text.");
 
-    $(this).parent("li").children("p").clone().appendTo("#nominatedMovies").append('   <button type="button" class="btn btn-warning btn-sm" id="' + this.id + '">Remove</button>');
+    $(this).parent("li").children("p").clone().appendTo("#nominatedMovies").append('   <button type="button" class="btn btn-secondary btn-sm" id="' + this.id + '">Remove</button>');
     $(this).parent("li").children("p").clone().appendTo("#nominatedList");
 
     //$("#nominatedMovies").children("li").appendChild(butt);
@@ -124,3 +142,7 @@ $('#nominatedMovies').on('click', 'button', function () {
   checkSearchResultButton();
 
 });
+
+  
+  
+

@@ -17,6 +17,9 @@
 </head>
 
 <body style="padding:20px">
+
+
+
   <div class="row">
     <h1 class="text-center">Hello, world!</h1>
 
@@ -33,7 +36,7 @@
     <p></p>
 
 
-
+    <!-- search bar and button-->
     <form id='searchButton'>
       
         <div class="d-grid gap-2 col-6 mx-auto">
@@ -47,10 +50,14 @@
     </form>
 
     <p></p>
+    
+   
+    <div class="progress bg-success "id="loader" style="display: none ; height: 30px;">
+      <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">Loading...</div>
+    </div>
 
 
-
-
+    <!-- results and nominated list-->
     <div class="row">
       <div class="col-sm-6">
         <div class="card">
@@ -73,10 +80,20 @@
       </div>
     </div>
 
+    
+
+
+
+
+
 
 
     <!-- local script-->
     <script src="js/app.js"></script>
+
+
+    
+   
 
 </body>
 
