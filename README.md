@@ -2,3 +2,5 @@
 
 This project is built for web developer challenge of summer 2021.
 
+The link is here: https://auston-zhang.github.io/shopifyChallenge/
+
