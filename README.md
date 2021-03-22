@@ -1,6 +1,3 @@
-## Shopify Challenge - Web Developer Summer 2021
+# CSCI 4147 Assignment 3  
 
-This project is built for web developer challenge of summer 2021.
-
-The link is here: https://auston-zhang.github.io/shopifyChallenge/
-
+# Team members: Adeolu Ogunnoiki, Aoxiang Zhang, Rita Liu, Taylor Macintyre
