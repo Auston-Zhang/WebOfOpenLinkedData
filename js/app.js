@@ -13,7 +13,7 @@ $('#searchButton').on('submit', function (ev) {
 
   // clear the previous search outcome
 
-  $("#SearchResult").empty();
+  $("#halifaxSearchResult").empty();
   $("#SearchResultCountry").empty();
   $("#SearchResult2").empty();
   $("#SearchResult2PublicationYear").empty();
@@ -22,7 +22,15 @@ $('#searchButton').on('submit', function (ev) {
   // perform search and show the result
   ev.preventDefault();
 
-   var queryUrl = 'https://opendata.arcgis.com/datasets/e0293fd4721e41d7be4d7386c3c59c16_0.geojson'
+  // get the street input from the search bar
+  var valueInput = $('input[name=streetSearchBar]').val();
+  // convert the input to uppercase, because the original data only contains uppercase street names
+  valueInput = valueInput.toUpperCase();
+  console.log("Input1",valueInput);
+
+
+
+  var queryUrl = 'https://opendata.arcgis.com/datasets/e0293fd4721e41d7be4d7386c3c59c16_0.geojson'
 
 
   // use jQuery function to parse JSON file return from the queryUrl
@@ -41,19 +49,26 @@ $('#searchButton').on('submit', function (ev) {
     // use 10 for test purpose
 
     // now we can get the data we want from the geoJSON file
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 1000; i++) {
+
       var roadLocation = arrayData[i].properties.ROAD_LOCATION_1;
 
       var accidentDate = arrayData[i].properties.ACCIDENT_DATE;
 
       var accidentCoordinate =  arrayData[i].geometry.coordinates;
 
-      //accidentDate = Datetime.accidentDate.format('YYYY-MM-dd');
+      var accidentDateShort = accidentDate.substring(0,10);
 
-      console.log("loop",accidentDate)
 
-      items.push( "<li id='" + i + "'>" + roadLocation + "     Date:"+ accidentDate +"Coordinates:    "+ accidentCoordinate + "</div> </li>" );
+      // console.log("loop",accidentDate)
 
+      // console.log("Input",valueInput);
+
+      // we use includes to help provide more information, users may not want to input the complete address
+      if( roadLocation.includes(valueInput)   ){
+
+        items.push( "<li id='" + i + "'>" + roadLocation + "            Date:"+ accidentDateShort +"         Coordinates:    "+ accidentCoordinate + "</div> </li>" );
+      }
     }
 
 
