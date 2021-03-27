@@ -84,16 +84,37 @@
 
     <!-- results and nominated list-->
     <div class="row">
-     
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Search Results from Halifax Data</h5>
+     
+
+            <h5 class="card-title text-center" >Search Results from Halifax Data</h5>
             <p></p>
             <div class="container" id="halifaxSearchResult">
-            </div>
+            
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Street Name</th>
+                    <th scope="col">Accident Date</th>
+                    <th scope="col">Coordinates</th>
+                    <th scope="col">Weather Condition</th>
+
+                  </tr>
+                </thead>
+                <tbody id="halifaxSearchResultTable">
+
+
+                </tbody>
+                
+              </table> 
+              
           </div>
-     
+    
+       </div>
+  
       </div>
     </div>
 
@@ -102,7 +123,7 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Search Results from OpenStreetMap</h5>
+            <h5 class="card-title text-center">Search Results from OpenStreetMap</h5>
             <p></p>
             <div class="container" id="openStreetMapSearchResult">
             </div>
@@ -116,7 +137,7 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Weather Condition(s)</h5>
+            <h5 class="card-title text-center">Weather Condition(s)</h5>
             <p></p>
             <div class="container" id="weatherSearchResult">
             </div>

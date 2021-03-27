@@ -13,7 +13,7 @@ $('#searchButton').on('submit', function (ev) {
 
   // clear the previous search outcome
 
-  $("#halifaxSearchResult").empty();
+  $("#halifaxSearchResultTable").empty();
   $("#SearchResultCountry").empty();
   $("#SearchResult2").empty();
   $("#SearchResult2PublicationYear").empty();
@@ -49,6 +49,7 @@ $('#searchButton').on('submit', function (ev) {
     // use 10 for test purpose
 
     // now we can get the data we want from the geoJSON file
+    var index = 1;
     for (i = 0; i < 1000; i++) {
 
       var roadLocation = arrayData[i].properties.ROAD_LOCATION_1;
@@ -65,24 +66,24 @@ $('#searchButton').on('submit', function (ev) {
       // console.log("Input",valueInput);
 
       // we use includes to help provide more information, users may not want to input the complete address
+      
       if( roadLocation.includes(valueInput)   ){
 
-        items.push( "<li id='" + i + "'>" + roadLocation + "            Date:"+ accidentDateShort +"         Coordinates:    "+ accidentCoordinate + "</div> </li>" );
+        var a =  ("<tr> <th scope='\row'\>"+index+"</th> <td>" +  roadLocation + "</td>           <td>"+ accidentDateShort +"</td>         <td>"+ accidentCoordinate + "</td> <td> to be added </td>  </tr>");
+        $('#halifaxSearchResultTable').append(a);
+        index = index+1;
       }
     }
 
 
 
     
-    $( "<ul/>", {
-      "class": "my-new-list",
-      html: items.join( "" )
-    }).appendTo( "#halifaxSearchResult" );
+    // $( "</tbody>", {
+    //   "class": "tbody",
+    //   html: items.join( "" )
+    // }).appendTo( "#halifaxSearchResultTable" );
 
-    $( "<ul/>", {
-      "class": "my-new-list",
-      html: filmCountry.join( "" )
-    }).appendTo( "#halifaxSearchResult" );
+   
 
     console.log(items);
   });
