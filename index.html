@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head style="padding:20px">
+
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +12,10 @@
   <title>CSCI 4147</title>
   <!-- jQuery link-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+  <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+
 
 </head>
 
@@ -101,6 +106,7 @@
                     <th scope="col">Accident Date</th>
                     <th scope="col">Coordinates</th>
                     <th scope="col">Weather Condition</th>
+                    <th scope="col">View on Map</th>
 
                   </tr>
                 </thead>
@@ -128,8 +134,28 @@
             <div class="container" id="openStreetMapSearchResult">
             </div>
           </div>
-     
-      </div>
+
+
+
+          <div id = "map" style = "width: 1800px; height: 580px"></div>
+          <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+                        <script>
+                           // Creating map options
+                           var mapOptions = {
+                              center: [44.642280679000066,-63.57976555199997],
+                              zoom: 16
+                           }
+                           
+                           // Creating a map object
+                           var map = new L.map('map', mapOptions);
+                           
+                           // Creating a Layer object
+                           var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+                           
+                           // Adding layer to the map
+                           map.addLayer(layer);
+                        </script>
+
     </div>
 
     <div class="row">

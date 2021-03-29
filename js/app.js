@@ -5,6 +5,10 @@
 // get data from two SPARQL endpoints: Dbpedia and WikiData, also added wikipedia links to countries in the result
 
 
+
+
+
+
 $('#searchButton').on('submit', function (ev) {
 
   // animation when click the search button
@@ -56,7 +60,14 @@ $('#searchButton').on('submit', function (ev) {
 
       var accidentDate = arrayData[i].properties.ACCIDENT_DATE;
 
-      var accidentCoordinate =  arrayData[i].geometry.coordinates;
+
+      var accidentCoordinate1 =  arrayData[i].geometry.coordinates[1];
+      var accidentCoordinate2 =  arrayData[i].geometry.coordinates[0];
+      accidentCoordinate1 = accidentCoordinate1.toString();
+      accidentCoordinate2 = accidentCoordinate2.toString();
+      var accidentCoordinate =   accidentCoordinate1.concat(', ', accidentCoordinate2);
+
+      
 
       var accidentDateShort = accidentDate.substring(0,10);
 
@@ -69,15 +80,20 @@ $('#searchButton').on('submit', function (ev) {
       
       if( roadLocation.includes(valueInput)   ){
 
-        var a =  ("<tr> <th scope='\row'\>"+index+"</th> <td>" +  roadLocation + "</td>           <td>"+ accidentDateShort +"</td>         <td>"+ accidentCoordinate + "</td> <td> to be added </td>  </tr>");
+  
+        var a =  ("<tr> <th scope='\row'\>"+index+"</th> <td>" +  roadLocation + "</td>           <td>"+ accidentDateShort +"</td>         <td>"+ accidentCoordinate + "</td> <td> to be added </td>" + "    <td> Click Me! </td>   </tr>");
         $('#halifaxSearchResultTable').append(a);
         index = index+1;
       }
+
+
     }
 
 
 
     
+
+
     // $( "</tbody>", {
     //   "class": "tbody",
     //   html: items.join( "" )
@@ -94,4 +110,6 @@ $('#searchButton').on('submit', function (ev) {
 
 
 });
+
+
 
