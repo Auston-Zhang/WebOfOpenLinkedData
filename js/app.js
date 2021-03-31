@@ -81,7 +81,7 @@ $('#searchButton').on('submit', function (ev) {
       if( roadLocation.includes(valueInput)   ){
 
   
-        var a =  ("<tr> <th scope='\row'\>"+index+"</th> <td>" +  roadLocation + "</td>           <td>"+ accidentDateShort +"</td>         <td>"+ accidentCoordinate + "</td> <td> to be added </td>" + "    <td> Click Me! </td>   </tr>");
+        var a =  ("<tr> <th scope='row'>"+index+"</th> <td>" +  roadLocation + "</td>           <td>"+ accidentDateShort +"</td>         <td id ='coordinateIndex-"+index+"'>"+ accidentCoordinate + "</td> <td> to be added </td>" + "    <td><btn onclick ='\ updateCoordinates(this.id) '\  id ='btnIndex-"+index+"'\        class='\ btn btn-warning '\>Click Me! </td>   </tr>");
         $('#halifaxSearchResultTable').append(a);
         index = index+1;
       }
@@ -89,10 +89,8 @@ $('#searchButton').on('submit', function (ev) {
 
     }
 
-
-
-    
-
+     // function to update the coordinate
+  
 
     // $( "</tbody>", {
     //   "class": "tbody",
@@ -105,6 +103,7 @@ $('#searchButton').on('submit', function (ev) {
   });
 
 
+ 
 
 
 
