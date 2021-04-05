@@ -4,9 +4,8 @@
 // the code logic referred to Nicola Raffaele Di Matteo's source code (PHP+HTML) posted on "Simple DBpedia search", Brightspace , CSCI 4147 Winter 2021
 // get data from two SPARQL endpoints: Dbpedia and WikiData, also added wikipedia links to countries in the result
 
-
-
-
+var weather;
+var weatherResult;
 
 
 $('#searchButton').on('submit', function (ev) {
@@ -21,7 +20,8 @@ $('#searchButton').on('submit', function (ev) {
   $("#SearchResultCountry").empty();
   $("#SearchResult2").empty();
   $("#SearchResult2PublicationYear").empty();
-  
+    $("#weather").empty();
+    $("#weatherResult").empty();
   
   // perform search and show the result
   ev.preventDefault();
@@ -31,7 +31,6 @@ $('#searchButton').on('submit', function (ev) {
   // convert the input to uppercase, because the original data only contains uppercase street names
   valueInput = valueInput.toUpperCase();
   console.log("Input1",valueInput);
-
 
 
   var queryUrl = 'https://opendata.arcgis.com/datasets/e0293fd4721e41d7be4d7386c3c59c16_0.geojson'
@@ -49,7 +48,8 @@ $('#searchButton').on('submit', function (ev) {
 
     console.log("ArrayData",arrayData[0].properties.ROAD_LOCATION_1);
 
-   
+
+
     // use 10 for test purpose
 
     // now we can get the data we want from the geoJSON file
@@ -78,27 +78,49 @@ $('#searchButton').on('submit', function (ev) {
 
       // we use includes to help provide more information, users may not want to input the complete address
       
-      if( roadLocation.includes(valueInput)   ){
+      if( roadLocation.includes(valueInput)  ){
 
           var condition = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Halifax/" + accidentDateShort + "?unitGroup=metric&key=B78G2RNYUSSZWDPGJRY7GNHZJ&include=obs";
           var x = httpGet(condition);
 //https://www.w3schools.com/js/js_json_parse.asp
           var obj = JSON.parse(x);
 //https://stackoverflow.com/questions/35182660/how-to-read-multi-level-json
-//           document.getElementById("obs").innerHTML =
-          var weather = obj.days[0].conditions;
-        var a =  (
-            "<tr> " +
-            "<th scope='row'>"+ index+"</th>" +
-            " <td>" + roadLocation + "</td>          " +
-            " <td>"+ accidentDateShort +"</td>         " +
-            "<td id ='coordinateIndex-"+index+"'>"+ accidentCoordinate  + "</td> " +
-            "<td>" + weather + "</td>" + "    " +
-            "<td><btn onclick ='\ updateCoordinates(this.id) '\  id ='btnIndex-"+index+"'\        class='\ btn btn-warning '\>Click Me! </td>  " +
-            " </tr>");
 
-        $('#halifaxSearchResultTable').append(a);
-        index = index+1;
+          weatherResult = obj.days[0].conditions;
+          console.log(weather);
+
+          //https://www.w3schools.com/jsref/prop_select_value.asp
+          //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_localecompare
+      if(weather == null || weather.localeCompare("---Choose weather condition---") == 0)  {
+          var a =  (
+              "<tr> " +
+              "<th scope='row'>"+ index+"</th>" +
+              " <td>" + roadLocation + "</td>          " +
+              " <td>"+ accidentDateShort +"</td>         " +
+              "<td id ='coordinateIndex-"+index+"'>"+ accidentCoordinate  + "</td> " +
+              "<td>" + weatherResult + "</td>" + "    " +
+              "<td><btn onclick ='\ updateCoordinates(this.id) '\  id ='btnIndex-"+index+"'\        class='\ btn btn-warning '\>Click Me! </td>  " +
+              " </tr>");
+
+          $('#halifaxSearchResultTable').append(a);
+          index = index+1;
+      }
+         else {
+        if(weather.localeCompare(weatherResult) == 0){
+            var a =  (
+                "<tr> " +
+                "<th scope='row'>"+ index+"</th>" +
+                " <td>" + roadLocation + "</td>          " +
+                " <td>"+ accidentDateShort +"</td>         " +
+                "<td id ='coordinateIndex-"+index+"'>"+ accidentCoordinate  + "</td> " +
+                "<td>" + weather + "</td>" + "    " +
+                "<td><btn onclick ='\ updateCoordinates(this.id) '\  id ='btnIndex-"+index+"'\        class='\ btn btn-warning '\>Click Me! </td>  " +
+                " </tr>");
+
+            $('#halifaxSearchResultTable').append(a);
+            index = index+1;
+        }
+      }
       }
 
 
@@ -133,4 +155,12 @@ function httpGet(theUrl)
     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
     xmlHttp.send( null );
     return xmlHttp.responseText;
+}
+
+//https://www.w3schools.com/tags/att_onchange.asp
+function favTutorial()
+{
+//    https://stackoverflow.com/questions/59581547/return-select-option-value-in-javascript
+    weather = document.getElementById('myList').value;
+
 }
