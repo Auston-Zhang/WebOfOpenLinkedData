@@ -80,8 +80,23 @@ $('#searchButton').on('submit', function (ev) {
       
       if( roadLocation.includes(valueInput)   ){
 
-  
-        var a =  ("<tr> <th scope='row'>"+index+"</th> <td>" +  roadLocation + "</td>           <td>"+ accidentDateShort +"</td>         <td id ='coordinateIndex-"+index+"'>"+ accidentCoordinate + "</td> <td> to be added </td>" + "    <td><btn onclick ='\ updateCoordinates(this.id) '\  id ='btnIndex-"+index+"'\        class='\ btn btn-warning '\>Click Me! </td>   </tr>");
+          var condition = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Halifax/" + accidentDateShort + "?unitGroup=metric&key=B78G2RNYUSSZWDPGJRY7GNHZJ&include=obs";
+          var x = httpGet(condition);
+//https://www.w3schools.com/js/js_json_parse.asp
+          var obj = JSON.parse(x);
+//https://stackoverflow.com/questions/35182660/how-to-read-multi-level-json
+//           document.getElementById("obs").innerHTML =
+          var weather = obj.days[0].conditions;
+        var a =  (
+            "<tr> " +
+            "<th scope='row'>"+ index+"</th>" +
+            " <td>" + roadLocation + "</td>          " +
+            " <td>"+ accidentDateShort +"</td>         " +
+            "<td id ='coordinateIndex-"+index+"'>"+ accidentCoordinate  + "</td> " +
+            "<td>" + weather + "</td>" + "    " +
+            "<td><btn onclick ='\ updateCoordinates(this.id) '\  id ='btnIndex-"+index+"'\        class='\ btn btn-warning '\>Click Me! </td>  " +
+            " </tr>");
+
         $('#halifaxSearchResultTable').append(a);
         index = index+1;
       }
@@ -111,4 +126,11 @@ $('#searchButton').on('submit', function (ev) {
 });
 
 
-
+function httpGet(theUrl)
+{
+//    https://stackoverflow.com/questions/247483/http-get-request-in-javascript
+        var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
